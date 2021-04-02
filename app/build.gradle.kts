@@ -12,6 +12,9 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+
+    // Publish
+    `maven-publish`
 }
 
 repositories {
@@ -42,4 +45,17 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass.set("trader.AppKt")
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = uri("https://maven.pkg.github.com/ChronoSerrano/trader")
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
 }
